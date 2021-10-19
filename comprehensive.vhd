@@ -1,0 +1,319 @@
+-- Copyright (C) 1991-2009 Altera Corporation
+-- Your use of Altera Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files from any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Altera Program License 
+-- Subscription Agreement, Altera MegaCore Function License 
+-- Agreement, or other applicable license agreement, including, 
+-- without limitation, that your use is for the sole purpose of 
+-- programming logic devices manufactured by Altera and sold by 
+-- Altera or its authorized distributors.  Please refer to the 
+-- applicable agreement for further details.
+
+-- PROGRAM		"Quartus II 64-Bit"
+-- VERSION		"Version 9.1 Build 222 10/21/2009 SJ Full Version"
+-- CREATED		"Thu Mar 04 12:27:06 2021"
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all; 
+
+LIBRARY work;
+
+ENTITY blockfinal IS 
+	PORT
+	(
+		pin_name :  IN  STD_LOGIC;
+		pin_name38 :  IN  STD_LOGIC;
+		pin_name39 :  IN  STD_LOGIC;
+		pin_name40 :  IN  STD_LOGIC;
+		clk :  IN  STD_LOGIC;
+		pin_name2 :  OUT  STD_LOGIC;
+		pin_name3 :  OUT  STD_LOGIC;
+		pin_name4 :  OUT  STD_LOGIC
+	);
+END blockfinal;
+
+ARCHITECTURE bdf_type OF blockfinal IS 
+
+COMPONENT add1n21
+	PORT(one : IN STD_LOGIC;
+		 ten : IN STD_LOGIC;
+		 hun : IN STD_LOGIC;
+		 en : IN STD_LOGIC;
+		 clk1 : IN STD_LOGIC;
+		 out1 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT mod_4
+	PORT(clk : IN STD_LOGIC;
+		 ci : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 coa : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 cob : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 coc : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT testnum1
+	PORT(		 cout : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT clk_div
+GENERIC (n : INTEGER
+			);
+	PORT(clk : IN STD_LOGIC;
+		 Y : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+COMPONENT comparison2_2
+	PORT(clk : IN STD_LOGIC;
+		 a : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 b : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 min : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 y : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT comparison3_3
+	PORT(clk : IN STD_LOGIC;
+		 ina : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 inb : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 inc : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 min : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 q1 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 q2 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT testall
+	PORT(in1 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 in2 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 in3 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 in4 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 in5 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 in6 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 cout : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT vhdl1
+	PORT(clk : IN STD_LOGIC;
+		 rst_n : IN STD_LOGIC;
+		 en : IN STD_LOGIC;
+		 idis_data : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 ds_stcp : OUT STD_LOGIC;
+		 ds_shcp : OUT STD_LOGIC;
+		 ds_data : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+COMPONENT select_2n
+	PORT(sel : IN STD_LOGIC;
+		 m1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 m2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 mo0 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT reme
+	PORT(en : IN STD_LOGIC;
+		 clk : IN STD_LOGIC;
+		 input : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 o1 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 o2 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 o3 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 o4 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 o5 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		 o6 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT count5
+	PORT(en : IN STD_LOGIC;
+		 clk : IN STD_LOGIC;
+		 cout : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+SIGNAL	SYNTHESIZED_WIRE_36 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_37 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_3 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_4 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_5 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_6 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_7 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_8 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_9 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_10 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_11 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_12 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_13 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_14 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_15 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_16 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_17 :  STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_18 :  STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_19 :  STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_20 :  STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_21 :  STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_22 :  STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_38 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_25 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_27 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_28 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_31 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_32 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_33 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_35 :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+
+BEGIN 
+SYNTHESIZED_WIRE_38 <= '1';
+
+
+
+b2v_inst : add1n21
+PORT MAP(one => pin_name,
+		 ten => pin_name38,
+		 hun => pin_name39,
+		 en => pin_name40,
+		 clk1 => SYNTHESIZED_WIRE_36,
+		 out1 => SYNTHESIZED_WIRE_37);
+
+
+b2v_inst1 : mod_4
+PORT MAP(clk => clk,
+		 ci => SYNTHESIZED_WIRE_37,
+		 coa => SYNTHESIZED_WIRE_17,
+		 cob => SYNTHESIZED_WIRE_18,
+		 coc => SYNTHESIZED_WIRE_19);
+
+
+b2v_inst10 : testnum1
+PORT MAP(		 cout => SYNTHESIZED_WIRE_33);
+
+
+b2v_inst13 : clk_div
+GENERIC MAP(n => 50000000
+			)
+PORT MAP(clk => clk,
+		 Y => SYNTHESIZED_WIRE_36);
+
+
+b2v_inst14 : comparison2_2
+PORT MAP(clk => clk,
+		 a => SYNTHESIZED_WIRE_2,
+		 b => SYNTHESIZED_WIRE_3,
+		 min => SYNTHESIZED_WIRE_8,
+		 y => SYNTHESIZED_WIRE_11);
+
+
+b2v_inst15 : comparison2_2
+PORT MAP(clk => clk,
+		 a => SYNTHESIZED_WIRE_4,
+		 b => SYNTHESIZED_WIRE_5,
+		 min => SYNTHESIZED_WIRE_9,
+		 y => SYNTHESIZED_WIRE_12);
+
+
+b2v_inst16 : comparison2_2
+PORT MAP(clk => clk,
+		 a => SYNTHESIZED_WIRE_6,
+		 b => SYNTHESIZED_WIRE_7,
+		 min => SYNTHESIZED_WIRE_10,
+		 y => SYNTHESIZED_WIRE_13);
+
+
+b2v_inst17 : comparison3_3
+PORT MAP(clk => clk,
+		 ina => SYNTHESIZED_WIRE_8,
+		 inb => SYNTHESIZED_WIRE_9,
+		 inc => SYNTHESIZED_WIRE_10,
+		 min => SYNTHESIZED_WIRE_27,
+		 q1 => SYNTHESIZED_WIRE_14,
+		 q2 => SYNTHESIZED_WIRE_15);
+
+
+b2v_inst18 : comparison3_3
+PORT MAP(clk => clk,
+		 ina => SYNTHESIZED_WIRE_11,
+		 inb => SYNTHESIZED_WIRE_12,
+		 inc => SYNTHESIZED_WIRE_13,
+		 min => SYNTHESIZED_WIRE_16);
+
+
+b2v_inst19 : comparison3_3
+PORT MAP(clk => clk,
+		 ina => SYNTHESIZED_WIRE_14,
+		 inb => SYNTHESIZED_WIRE_15,
+		 inc => SYNTHESIZED_WIRE_16,
+		 min => SYNTHESIZED_WIRE_28);
+
+
+b2v_inst2 : testall
+PORT MAP(in1 => SYNTHESIZED_WIRE_17,
+		 in2 => SYNTHESIZED_WIRE_18,
+		 in3 => SYNTHESIZED_WIRE_19,
+		 in4 => SYNTHESIZED_WIRE_20,
+		 in5 => SYNTHESIZED_WIRE_21,
+		 in6 => SYNTHESIZED_WIRE_22,
+		 cout => SYNTHESIZED_WIRE_25);
+
+
+b2v_inst3 : vhdl1
+PORT MAP(clk => clk,
+		 rst_n => SYNTHESIZED_WIRE_38,
+		 en => SYNTHESIZED_WIRE_38,
+		 idis_data => SYNTHESIZED_WIRE_25,
+		 ds_stcp => pin_name2,
+		 ds_shcp => pin_name3,
+		 ds_data => pin_name4);
+
+
+b2v_inst4 : select_2n
+PORT MAP(sel => SYNTHESIZED_WIRE_36,
+		 m1 => SYNTHESIZED_WIRE_27,
+		 m2 => SYNTHESIZED_WIRE_28,
+		 mo0 => SYNTHESIZED_WIRE_32);
+
+
+b2v_inst5 : reme
+PORT MAP(en => pin_name40,
+		 clk => SYNTHESIZED_WIRE_36,
+		 input => SYNTHESIZED_WIRE_37,
+		 o1 => SYNTHESIZED_WIRE_2,
+		 o2 => SYNTHESIZED_WIRE_3,
+		 o3 => SYNTHESIZED_WIRE_4,
+		 o4 => SYNTHESIZED_WIRE_5,
+		 o5 => SYNTHESIZED_WIRE_6,
+		 o6 => SYNTHESIZED_WIRE_7);
+
+
+b2v_inst6 : select_2n
+PORT MAP(sel => SYNTHESIZED_WIRE_31,
+		 m1 => SYNTHESIZED_WIRE_32,
+		 m2 => SYNTHESIZED_WIRE_33,
+		 mo0 => SYNTHESIZED_WIRE_35);
+
+
+b2v_inst7 : count5
+PORT MAP(en => pin_name40,
+		 clk => SYNTHESIZED_WIRE_36,
+		 cout => SYNTHESIZED_WIRE_31);
+
+
+b2v_inst8 : mod_4
+PORT MAP(clk => clk,
+		 ci => SYNTHESIZED_WIRE_35,
+		 coa => SYNTHESIZED_WIRE_20,
+		 cob => SYNTHESIZED_WIRE_21,
+		 coc => SYNTHESIZED_WIRE_22);
+
+
+
+END bdf_type;
